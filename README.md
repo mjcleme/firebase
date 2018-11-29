@@ -21,9 +21,9 @@ For this tutorial we will build a simple angular chat application
   firebase.initializeApp(config);
   </script>
   <!-- AngularJS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-  <!-- AngularFire -->
-  <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
   <!-- Your Javascript -->
   <script src="javascripts/script.js"></script>
   </head>
@@ -63,13 +63,12 @@ myApp.controller("chatController", ["$scope",
 ]);
   ```
 3. Test the application to make sure it works.
-4. Now save the posts into firebase and make sure they end up there by looking at the database page.  First allow connections to your firebase database without authentication.  Go to your firebase console and select "Database" on the left margin.  Then select "Create Database" under "Cloud Firestore" pane.  Select "Start in test mode" to allow anyone to access the database.  You will need to change this if your application goes into production.  the "This should expose the tabs "Data", "Rules", "Usage", "Backups".  Select "Rules" and make sure that the permissions look like the following.
+4. Now save the posts into firebase and make sure they end up there by looking at the database page.  First allow connections to your firebase database without authentication.  Go to your firebase console and select "Database" on the left margin.  Then select "Create Database" under "Realtime Database" pane.  Select "Start in test mode" to allow anyone to access the database.  You will need to change this if your application goes into production.  the "This should expose the tabs "Data", "Rules", "Usage", "Backups".  Select "Rules" and make sure that the permissions look like the following.
  ```
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
-    }
+{
+  "rules": {
+    ".read": true,
+    ".write": true
   }
 }
  ```
