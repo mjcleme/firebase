@@ -1,7 +1,7 @@
 # firebase tutorial
 For this tutorial we will build a simple angular chat application
 
-1. Set up your firebase account at https://firebase.google.com/.  You should be able to login using your google account.  Go to the console and create a new project called "chat".  When you go to the project, you will see a option to "Add Firebase to your web app".  Select this option and it will give you a block of code to add to your firebase application.
+1. Set up your firebase account at https://firebase.google.com/.  You should be able to login using your google account.  Go to the console and create a new project called "chat".  When you go to the project, you will see a option to "Add Firebase to your web app" with a "</>".  Select this option and it will give you a block of code to add to your firebase application.
 2. Create an express application to host your files (express firebase)
 2. Create an angular front end with a form and a place to list existing chats (public/index.html).
   ```html
@@ -63,12 +63,13 @@ myApp.controller("chatController", ["$scope",
 ]);
   ```
 3. Test the application to make sure it works.
-4. Now save the posts into firebase and make sure they end up there by looking at the database page.  First allow connections to your firebase database without authentication.  Go to your firebase console and select "Database" on the left margin.  This should expose the tabs "Data", "Rules", "Usage", "Backups".  Select "Rules" and replace the given rules with the following.
+4. Now save the posts into firebase and make sure they end up there by looking at the database page.  First allow connections to your firebase database without authentication.  Go to your firebase console and select "Database" on the left margin.  Then select "Create Database" under "Cloud Firestore" pane.  Select "Start in test mode" to allow anyone to access the database.  You will need to change this if your application goes into production.  the "This should expose the tabs "Data", "Rules", "Usage", "Backups".  Select "Rules" and make sure that the permissions look like the following.
  ```
-{
-  "rules": {
-    ".read": "true",
-    ".write": "true"
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write;
+    }
   }
 }
  ```
